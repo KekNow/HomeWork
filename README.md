@@ -5,7 +5,8 @@
 
 Чтобы запустить программу, введите в терминале `python main.py` и следуйте следующим инструкциям:
 
-Выберите режим `Enter the mode (c/compress/z/zip or d/decompress/u/unzip or t/test): z`
+Выберите режим  
+`Enter the mode (c/compress/z/zip or d/decompress/u/unzip or t/test): z`
 
 При компрессии: введите имя файла который хотите сжать  
 `Enter the name of the file you want to compress: main.py`
@@ -14,10 +15,10 @@
 `Enter the name of the file you want to decompress (need to .zmh extension): main.zmh`  
 `Enter the extension of the file you want to decompress (like .jpeg): .py`
 
-Режим test по введённому названию файла прогоняет весь пайплайн: сжимает файл, затем разжимает
+Режим test по введённому названию файла прогоняет весь пайплайн: сжимает файл, затем разжимает  
 `Enter the name of the file you want to compress and after decompress: main.py`
 
-Также данный режим сравнивает разархивированный файл с оригинальным - все ли операции прошли успешно
+Также данный режим сравнивает разархивированный файл с оригинальным - все ли операции прошли успешно  
 `The sameness of the input file and the resulting: True`
 
 # Пояснительная записка

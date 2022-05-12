@@ -36,10 +36,10 @@ def create_root_tree(dict_freq: dict) -> Node:
         leaf = Node(byte, freq)
         heappush(heap, leaf)
     
-    while len(heap) > 1: # while we don't achieved root we need fetch 2 nodes from the heap and combine them
+    while len(heap) > 1: # while we don't reach root we need fetch 2 nodes from the heap and combine them
         left = heappop(heap)
         right = heappop(heap)
-        # we combine them nodes to 1 common ancestor and push him to heap
+        # we combine the nodes to 1 common ancestor and push him to heap
         node = Node(None, left.freq+right.freq, left, right)
         heappush(heap, node)
     
@@ -48,19 +48,19 @@ def create_root_tree(dict_freq: dict) -> Node:
 
 def huffman(dict_cipher: dict, node: Node, cipher: bitarray = bitarray()):
     """
-    Recursive function to create cipher-code for everyone byte from root of tree
+    Recursive function to create cipher-code for every byte from root of tree
     """
     if node: # if this node is not None
-        if node.byte is not None: # then we on the leaf and need to add cipher-code for this byte
+        if node.byte is not None: # then we are on the leaf and need to add cipher-code for this byte
             dict_cipher[node.byte] = cipher
-        else: # then we on the parent and we need to go to the childrens: left (0) or right (1)
+        else: # then we are on the parent and we need to go to the children: left (0) or right (1)
             huffman(dict_cipher, node.left, cipher + bitarray('0'))
             huffman(dict_cipher, node.right, cipher + bitarray('1'))
 
 
 def decoding(file_bytes_encode: bytes, dict_cipher: dict) -> list:
     """
-    Function to decode encoding file like file_bytes_encode by dict_cipher and convert it list of original bytes
+    Function to decode encoding file like file_bytes_encode by dict_cipher and convert it to a list of original bytes
     """
     # create new reversed dict from dict_cipher - dict_bytes
     dict_bytes = {frozenbitarray(cipher): byte for byte, cipher in dict_cipher.items()}
@@ -106,10 +106,10 @@ def compress(namefile: str):
     
     file_bytes_encode = encoding(file_bytes, dict_cipher) # convert original file to bitarray by dict_cipher
     
-    meta = bitarray('000') # create meta infromation to file. Meta starts from 3 bits - reserved to fill for last byte
+    meta = bitarray('000') # create meta information of file. Meta starts from 3 bits - reserved to fill for last byte
     meta += bitarray(format(len(dict_cipher), '09b')[1:]) # append byte with len(dict_cipher) #bytes in original file
 
-    for byte in dict_cipher: # append byte from original file and length of cipher-code for everyone byte like 2 bytes
+    for byte in dict_cipher: # add byte from source file and ciphercode length for each byte as 2 bytes
         meta.frombytes(bytes([byte, len(dict_cipher[byte])]))
         meta.extend(dict_cipher[byte]) # append cipher-code like bitarray
     
